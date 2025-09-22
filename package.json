@@ -1,0 +1,12 @@
+{
+  "name": "agri-supply-chain",
+  "version": "1.0.0",
+  "description": "Blockchain-based supply chain for agriculture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "truffle": "^5.11.5"
+  }
+}

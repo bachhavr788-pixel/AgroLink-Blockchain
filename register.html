@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register Farmer - AgroLink</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    body {
+      background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #3a1c71);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .glass-card { background: rgba(15,15,35,0.25); backdrop-filter: blur(10px); border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 32px rgba(0,0,0,0.36); transition:all .3s ease; }
+    .glass-card:hover { transform:translateY(-5px); box-shadow:0 12px 40px rgba(138,43,226,0.4); border:1px solid rgba(138,43,226,0.3); }
+    .neon-btn { background: rgba(138,43,226,0.1); border:1px solid rgba(138,43,226,0.3); color:white; transition:all .3s; position:relative; overflow:hidden; text-decoration: none; display: inline-block; }
+    .neon-btn:hover { background: rgba(138,43,226,0.3); box-shadow:0 0 15px rgba(138,43,226,.5); transform:translateY(-2px); color: white; text-decoration: none; }
+    .neon-btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent, rgba(138,43,226,0.4), transparent); transition:.5s; }
+    .neon-btn:hover::before { left:100%; }
+    .glow-text { text-shadow:0 0 10px rgba(138,43,226,0.7); }
+    .input-field { background: rgba(15,15,35,0.3); border: 1px solid rgba(138,43,226,0.3); border-radius: 12px; padding: 12px 16px; width: 100%; color: white; transition: all 0.3s; }
+    .input-field:focus { outline: none; border-color: rgba(138,43,226,0.6); box-shadow: 0 0 15px rgba(138,43,226,0.2); background: rgba(15,15,35,0.4); }
+    .input-field::placeholder { color: rgba(255,255,255,0.5); }
+    .submit-btn { background: linear-gradient(45deg, rgba(138,43,226,0.8), rgba(100,217,255,0.8)); border: none; border-radius: 12px; padding: 12px 24px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .submit-btn:hover { background: linear-gradient(45deg, rgba(138,43,226,1), rgba(100,217,255,1)); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(138,43,226,0.4); }
+    .back-btn { background: rgba(75,85,99,0.3); border: 1px solid rgba(75,85,99,0.5); }
+    .back-btn:hover { background: rgba(75,85,99,0.5); }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-4 glow-text">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">👨‍🌾 Farmer Portal</span>
+      </h1>
+      <p class="text-xl text-purple-200">Join the AgroLink Blockchain Network</p>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="glass-card p-8">
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-purple-200 mb-2 flex items-center">
+          <i data-feather="user-plus" class="w-6 h-6 mr-3"></i>
+          Farmer Registration
+        </h2>
+        <p class="text-purple-300">Complete this form to register on the blockchain</p>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div id="messageBox" class="mb-6 p-4 rounded-lg hidden">
+        <p id="messageText"></p>
+      </div>
+
+      <form id="registrationForm" method="POST">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Full Name -->
+          <div>
+            <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+              <i data-feather="user" class="w-4 h-4 mr-2"></i>
+              Full Name *
+            </label>
+            <input type="text" name="name" id="name" required
+                   class="input-field" placeholder="Enter your full name">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+              <i data-feather="mail" class="w-4 h-4 mr-2"></i>
+              Email Address *
+            </label>
+            <input type="email" name="email" id="email" required
+                   class="input-field" placeholder="your@email.com">
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+              <i data-feather="phone" class="w-4 h-4 mr-2"></i>
+              Phone Number *
+            </label>
+            <input type="tel" name="phone" id="phone" required
+                   class="input-field" placeholder="+91 XXXXX XXXXX">
+          </div>
+
+          <!-- Farm Size -->
+          <div>
+            <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+              <i data-feather="map" class="w-4 h-4 mr-2"></i>
+              Farm Size (hectares)
+            </label>
+            <input type="number" name="farm_size" id="farm_size" step="0.1"
+                   class="input-field" placeholder="e.g., 2.5">
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mt-6">
+          <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+            <i data-feather="map-pin" class="w-4 h-4 mr-2"></i>
+            Farm Address *
+          </label>
+          <textarea name="address" id="address" rows="3" required
+                    class="input-field resize-none" placeholder="Enter your complete farm address"></textarea>
+        </div>
+
+        <!-- Crops -->
+        <div class="mt-6">
+          <label class="block text-purple-200 text-sm font-medium mb-2 flex items-center">
+            <i data-feather="layers" class="w-4 h-4 mr-2"></i>
+            Crops Grown
+          </label>
+          <input type="text" name="crops" id="crops"
+                 class="input-field" placeholder="e.g., Tomatoes, Carrots, Rice, Wheat">
+          <p class="text-purple-400 text-sm mt-1">Separate multiple crops with commas</p>
+        </div>
+
+        <!-- Blockchain Info -->
+        <div class="mt-8 p-4 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-700/30">
+          <h3 class="text-lg font-semibold text-purple-200 mb-2 flex items-center">
+            <i data-feather="shield" class="w-5 h-5 mr-2"></i>
+            Blockchain Benefits
+          </h3>
+          <ul class="text-purple-300 text-sm space-y-1">
+            <li>✅ Immutable record of your farm data</li>
+            <li>✅ Transparent supply chain tracking</li>
+            <li>✅ Direct consumer trust and verification</li>
+            <li>✅ Enhanced product traceability</li>
+          </ul>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-8 flex gap-4">
+          <button type="submit" id="submitBtn" class="submit-btn flex-1 flex items-center justify-center">
+            <i data-feather="check-circle" class="w-5 h-5 mr-2"></i>
+            <span id="submitText">Register on Blockchain</span>
+          </button>
+          <a href="index.html" class="neon-btn back-btn px-6 py-3 rounded-lg flex items-center">
+            <i data-feather="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Home
+          </a>
+        </div>
+      </form> <!-- Demo Notice -->
+<div class="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+  <h4 class="text-blue-300 font-medium mb-2 flex items-center">
+    <i data-feather="info" class="w-4 h-4 mr-2"></i>
+    Demo Mode
+  </h4>
+  <p class="text-blue-200 text-sm">
+    This is a demonstration interface. In a production environment, this form would:
+  </p>
+  <ul class="text-blue-300 text-sm mt-2 space-y-1 ml-6">
+    <li>• Connect to a real blockchain network</li>
+    <li>• Create an immutable farmer record</li>
+    <li>• Generate a unique blockchain wallet address</li>
+    <li>• Enable product tracking and verification</li>
+  </ul>
+</div>
+    </div>
+
+    <!-- Registration Steps Info -->
+    <div class="mt-8 glass-card p-6">
+      <h3 class="text-lg font-semibold text-purple-200 mb-4 flex items-center">
+        <i data-feather="info" class="w-5 h-5 mr-2"></i>
+        What Happens Next?
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+          <div>
+            <h4 class="text-purple-200 font-medium">Blockchain Registration</h4>
+            <p class="text-purple-400">Your data is recorded on the blockchain</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+          <div>
+            <h4 class="text-purple-200 font-medium">Verification</h4>
+            <p class="text-purple-400">Your farmer profile gets verified</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 bg-cyan-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+          <div>
+            <h4 class="text-purple-200 font-medium">Start Adding Products</h4>
+            <p class="text-purple-400">Begin adding your farm products</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Feather icons
+    feather.replace();
+
+    // Form handling
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Get form data
+  const formData = new FormData(this);
+  const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const messageBox = document.getElementById('messageBox');
+  const messageText = document.getElementById('messageText');
+  
+  // Show loading state
+  submitBtn.disabled = true;
+  submitText.textContent = 'Processing Registration...';
+  submitBtn.style.opacity = '0.7';
+  
+  // Simulate registration for demo purposes
+  setTimeout(() => {
+    // Generate a demo farmer ID
+    const demoFarmerId = 'FARM' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    
+    // Success message
+    messageBox.className = 'mb-6 p-4 rounded-lg bg-green-900/30 border border-green-500/50';
+    messageText.innerHTML = `
+      <div class="flex items-center">
+        <i data-feather="check-circle" class="w-5 h-5 mr-2 text-green-400"></i>
+        <span class="text-green-300">Demo Registration Successful! Farmer ID: <strong>${demoFarmerId}</strong></span>
+      </div>
+      <div class="mt-2 text-sm text-yellow-400">
+        <i data-feather="info" class="w-4 h-4 inline mr-1"></i>
+        This is a demonstration. In a real application, this would connect to a blockchain.
+      </div>
+    `;
+    messageBox.classList.remove('hidden');
+    feather.replace();
+    
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      this.reset();
+      messageBox.classList.add('hidden');
+    }, 5000);
+    
+    // Reset button state
+    submitBtn.disabled = false;
+    submitText.textContent = 'Register on Blockchain';
+    submitBtn.style.opacity = '1';
+  }, 2000);
+});
+  </script>
+</body>
+</html>
